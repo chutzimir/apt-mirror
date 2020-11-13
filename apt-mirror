@@ -426,6 +426,7 @@ foreach (@config_sources)
     else
     {
         $url = $uri . "/" . $distribution . "/";
+        add_url_to_download( $url . "Sources" );
     }
 
     add_url_to_download( $url . "InRelease" );
@@ -440,11 +441,17 @@ foreach (@config_binaries)
     if (@components)
     {
         $url = $uri . "/dists/" . $distribution . "/";
-
-        add_url_to_download( $url . "InRelease" );
-        add_url_to_download( $url . "Release" );
-        add_url_to_download( $url . "Release.gpg" );
     }
+    else
+    {
+        $url = $uri . "/" . $distribution . "/";
+        add_url_to_download( $url . "Packages" );
+    }
+
+    add_url_to_download( $url . "InRelease" );
+    add_url_to_download( $url . "Release" );
+    add_url_to_download( $url . "Release.gpg" );
+
 }
 
 chdir get_variable("skel_path") or die("apt-mirror: can't chdir to skel");
